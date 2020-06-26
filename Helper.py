@@ -12,7 +12,7 @@ class FileIOHelper:
         f.close()
 
 
-    def FileRead(self,text):
+    def FileRead(self):
         f = open(self.filename, "r")
         f1=f.readlines()
         f.close()
