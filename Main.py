@@ -10,15 +10,15 @@ from graph import PlotGraph
 from Helper import FileIOHelper
 
 
-WAIT_SECONDS = 2
+WAIT_SECONDS = 1
 URI ='https://s1.ripple.com:51234/'
 TASK = {"method":"server_info","params":[{}]}
-FILE_NAME="test.txt"
+FILE_NAME="test.txt"+str(datetime.datetime.now().date()) + '_' + str(datetime.datetime.now().time()).replace(':', '.')
 
 #Creating instance
 caller = ApiCaller(URI,TASK)
 file = FileIOHelper(FILE_NAME)
-graph = PlotGraph()
+graph = PlotGraph(FILE_NAME)
 threads = list()
 
 if __name__ == "__main__":
@@ -54,6 +54,7 @@ threads.append(x)
 x.start()
 
 #Opening thread for Graph
+time.sleep(10)#wait for Calling WebAPi and File creation
 y = threading.Thread(target=graph.showGraph(), args=(2,))
 threads.append(y)
 y.start()
